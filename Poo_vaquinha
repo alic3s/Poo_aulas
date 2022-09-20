@@ -1,0 +1,23 @@
+class Vaca:
+    def __init__ (self, registro, peso, raca, cor):
+        self.registro = registro
+        self.raca = raca
+        self.cor = cor
+        self.tamanho = 0.0
+        self.idade = 0
+        self.peso = 0.0
+        self.leite = 0.0
+
+    def comer (self, alimento, quantidade):
+        self.peso += quantidade*0.05
+        print(f"A vaca comeu {quantidade} kg de {alimento}")
+    
+    def ruminar (self):
+        print('Urrrrrrrgh...nhek, nhek, nhek.')
+    
+    def produzirLeite(self):
+        self.leite = self.peso * 0.02
+        return self.leite
+    
+    def caminhar(self, distancia):
+        print('Tek tek tek...uf, a vaca caminhou: ', distancia)
