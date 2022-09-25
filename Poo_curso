@@ -11,6 +11,7 @@ class Curso:
     
     def add_docente(self, professor: Professor):
         novo_professor = professor
+        novo_professo.append(professor[])
     
     def imprimir(self):
         print(f'O código do curso é: {self.codigo}')
@@ -29,7 +30,7 @@ class Professor:
         self.lotacao = curso
     
     def set_lotacao(self, curso: Curso):
-        local = curso
+        nova_lotacao = curso
     
     def imprimir(self):
         print(f'A matricula do professor é: {self.matricula}')
@@ -48,7 +49,8 @@ class Aluno:
         self.cursos = curso[]
     
     def matricular(curso: Curso):
-        todos_cursos = curso
+        self.cursos.append(curso)
+        print(f'Estes são os cursos no qual o aluno está matriculado: {self.cursos[]}')
     
     def imprimir(self):
         print(f'A matricula do aluno é: {self.matricula_a}')
