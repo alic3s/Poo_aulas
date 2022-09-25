@@ -17,7 +17,18 @@ class Vaca:
     
     def produzirLeite(self):
         self.leite = self.peso * 0.02
+        print('A vaca produziu', str(leite), 'litros de leite')
         return self.leite
     
     def caminhar(self, distancia):
-        print('Tek tek tek...uf, a vaca caminhou: ', distancia)
+        print('Tek tek tek...uf, a vaca caminhou: ', distancia, 'metros')
+        
+
+Mimosa = Vaca
+Mimosa.registro = 12345
+Mimosa.peso = 60
+Mimosa.cor = 'Preto'
+Mimosa.comer('grama', 10);
+
+print(Mimosa.registro, Mimosa.peso, Mimosa.cor)
+print(Mimosa.comer)
