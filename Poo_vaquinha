@@ -22,6 +22,14 @@ class Vaca:
     
     def caminhar(self, distancia):
         print('Tek tek tek...uf, a vaca caminhou: ', distancia, 'metros')
+    
+    def imprimir(self):
+        print(f'O registro da vaca é: {self.registro}')
+        print(f'A raça da vaca é {self.raca}')
+        print(f'A cor da vaca é {self.cor}')
+        print(f'O tamanho dela é {self.tamanho}')
+        print(f'A idade dela é {self.idade}')
+        print(f'O peso dela é {self.peso}')
         
 
 Mimosa = Vaca
