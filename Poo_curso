@@ -1,0 +1,13 @@
+class Curso:
+    def __init__(self, codigo, nome, descricao, coordenador, docentes):
+        self.codigo = codigo
+        self.nome = nome
+        self.descricao = descricao
+        self.coordenador = professor
+        self.docentes = professor[]
+        
+    def definir_coordenador(self, coordenador: Professor):
+        print()
+
+class Professor:
+    def __init__(self, )
