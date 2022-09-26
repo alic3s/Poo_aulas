@@ -40,14 +40,14 @@ class Professor:
         print(f'A lotação do professor: {self.lotacao}')
 
 class Aluno:
-    def __init__(self, matricula_a, nome_a, cpf_a, email_a):
+    def __init__(self, matricula_a, nome_a, cpf_a, email_a = None):
         self.matricula_a = matricula_a
         self.nome_a = nome_a
         self.cpf_a = cpf_a
         self.email_a = email_a
-        self.cursos = list(Curso)
+        self.cursos = []
     
-    def matricular(self, curso: Curso):
+    def matricular(self, curso):
         self.cursos.append(curso)
         print(f'Estes são os cursos no qual o aluno está matriculado: {self.cursos}')
     
@@ -55,7 +55,6 @@ class Aluno:
         print(f'A matricula do aluno é: {self.matricula_a}')
         print(f'O nome do aluno é: {self.nome_a}')
         print(f'O cpf do aluno é: {self.cpf_a}')
-        print(f'A admissao do professor: {self.admissao}')
         print(f'O email do aluno: {self.email_a}')
         print(f'Os cursos que o aluno faz são: {self.cursos}')
 
