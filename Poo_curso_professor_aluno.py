@@ -6,8 +6,8 @@ class Curso:
         self.coordenador = coordenador
         self.docentes = []
         
-    def definir_coordenador(self, coordenador):
-        self.coordenador = coordenador
+    def definir_coordenador(self, professor):
+        self.coordenador = professor
     
     def add_docente(self, professor):
         self.docentes.append(professor)
