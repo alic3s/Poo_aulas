@@ -11,13 +11,9 @@ class Curso:
     
     def add_docente(self, professor):
         self.docentes.append(professor)
-    
-    def imprimir(self):
-        print(f'O código do curso é: {self.codigo}')
-        print(f'O nome do curso é: {self.nome}')
-        print(f'A descrição do curso é: {self.descricao}')
-        print(f'O coordenador do curso é: {self.coordenador}')
-        print(f'Os professores do curso são: {self.docentes}')
+
+    def __str__ (self):
+        return f"[O código do curso é: {self.codigo}, o nome é: {self.nome}, sua descrição: {self.descricao}, o coordenador: {self.coordenador} e os docentes: {self.docentes}]"
 
 class Professor:
     def __init__(self, matricula, nome_, cpf, admissao, email):
@@ -30,14 +26,9 @@ class Professor:
     
     def set_lotacao(self, curso: Curso):
         self.lotacao = curso
-    
-    def imprimir(self):
-        print(f'A matricula do professor é: {self.matricula}')
-        print(f'O nome do professor é: {self.nome_}')
-        print(f'O cpf do professor é: {self.cpf}')
-        print(f'A admissao do professor: {self.admissao}')
-        print(f'O email do professor: {self.email}')
-        print(f'A lotação do professor: {self.lotacao}')
+
+    def __str__ (self):
+        return f' [Matrícula: {self.matricula}, o nome: {self.nome_}, cpf: {self.cpf}, admissao: {self.admissao} email: {self.email}, lotação: {self.lotacao}]'
 
 class Aluno:
     def __init__(self, matricula_a, nome_a, cpf_a, email_a = None):
@@ -59,6 +50,9 @@ class Aluno:
         print(f'Os cursos que o aluno faz são: {self.cursos}')
 
 biologia = Curso(123, 'Biologia', 'Dificil', 'Jorginho')
-jorge = Professor(123132, 'Jorge', 123123123, '123d1s2a3ds', '213123')
-biologia.add_docente(jorge)
-biologia.imprimir()
+carlos = Professor(123132, 'Carlos', 123123123, '123d1s2a3ds', '213123')
+pedro = Professor(12345, 'Pedro', 56576, '6yhg277', '65579')
+biologia.add_docente(carlos)
+biologia.add_docente(pedro)
+
+print(biologia)
