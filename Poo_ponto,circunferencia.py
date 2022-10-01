@@ -6,11 +6,9 @@ class Ponto:
     
     def alterar_cor(self, nova_cor = ''):
        self.cor = nova_cor
-
-    def imprimir(self):
-        print(f'O valor do ponto X é: {self.x}')
-        print(f'O valor do ponto Y é: {self.y}')
-        print(f'A nova cor é: {self.cor}')
+    
+    def __str__ (self):
+        return f' Esse é meu objeto: [{self.x}, {self.y}, {self.cor}]'
 
 class Circunferencia:
     def __init__(self, ponto, raio, cor_linha, cor_preenchimento):
@@ -24,9 +22,17 @@ class Circunferencia:
 
     def perimetro(self):
         return 2 * (3.14 * self.raio)
+    
+    def __str__ (self):
+        return f' Esse é meu objeto: [{self.centro}, {self.raio}, {self.cor_linha}, {self.cor_preenchimento}]'
 
-    def imprimir_2(self):
-        print(f'O centro da circunferência é {self.centro}')
-        print(f'O raio da circunferência é {self.raio}')
-        print(f'A cor da linha da circunferência é {self.cor_linha}')
-        print(f'A cor do preenchimento da circunferência é {self.cor_preenchimento}')
+p1 = Ponto(1, 2, 'branco')
+p2 = Ponto(3, 4, 'preto')
+
+p1.alterar_cor('Lilás')
+print(p1)
+
+c1 = Circunferencia(p1.y, 3, 'azul', 'roxo')
+print(c1.area())
+print(c1.perimetro())
+print(c1)
