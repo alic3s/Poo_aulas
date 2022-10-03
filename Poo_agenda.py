@@ -1,3 +1,17 @@
+class Agenda:
+    def __init__(self):
+        self.contatos[] = Contato
+
+    def pesquisar_nome(self, nome):
+        self.contato = contato
+        
+    def alterar_contato(self, nome):
+        self.contato = ''
+        
+    def add_contato(self, contato):
+        self.contatos.append(contato)
+        
+        
 class Contato:
     def __init__(self, nome, email = None):
         self.nome = nome
@@ -32,19 +46,6 @@ class Telefone:
     
     def alterar_numero(self, numero):
         self.numero = numero
-
-class Agenda:
-    def __init__(self):
-        self.contatos[] = Contato
-
-    def pesquisar_nome(self, nome):
-        self.contato = contato
-        
-    def alterar_contato(self, nome):
-        self.contato = ''
-        
-    def add_contato(self, contato):
-        self.contatos.append(contato)
 
 
 print('-' * 25 + '\n' + 'AGENDA'.center(25) + '\n' + '-' * 25)
