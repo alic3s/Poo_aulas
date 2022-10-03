@@ -2,7 +2,7 @@ class Contato:
     def __init__(self, nome, email = None):
         self.nome = nome
         self.email = email
-        self.telefone = []
+        self.telefone[] = Telefone
     
     def alterar_email(self, email):
         self.email = email
@@ -17,6 +17,11 @@ class Contato:
         print(self.nome)
         print(self.telefone)
         print(self.email)
+    
+    def str(self):
+    f'Esse é o nome: {self.nome.str}'
+    f'Esse é o telefone: {self.telefone.str}'
+    f'Esse é o email: {self.email.str}'
 
 
 class Telefone:
@@ -30,10 +35,12 @@ class Telefone:
 
 class Agenda:
     def __init__(self):
-        self.contatos = []
+        self.contatos[] = Contato
 
     def pesquisar_nome(self, nome):
-        self.contatos
+        self.contato = Contato
+    def alterar_contato(self):
+    def add_contato(self):
 
 
 
