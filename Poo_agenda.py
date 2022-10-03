@@ -1,6 +1,6 @@
 class Agenda:
     def __init__(self):
-        self.contatos[] = Contato
+        self.contatos = []
 
     def pesquisar_nome(self, nome):
         self.contato = contato
@@ -16,7 +16,7 @@ class Contato:
     def __init__(self, nome, email = None):
         self.nome = nome
         self.email = email
-        self.telefone[] = Telefone
+        self.telefone = []
     
     def alterar_email(self, email):
         self.email = email
