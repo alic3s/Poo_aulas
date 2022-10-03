@@ -1,41 +1,27 @@
-class Agenda:
-    def __init__(self):
-        self.contatos = []
-
-    def pesquisar_nome(self, nome):
-        self.contato = contato
-        
-    def alterar_contato(self, nome):
-        self.contato = ''
-        
-    def add_contato(self, contato):
-        self.contatos.append(contato)
-        
-        
 class Contato:
-    def __init__(self, nome, email = None):
+    def __init__(self, nome, email = None, telefone = None):
         self.nome = nome
         self.email = email
-        self.telefone = []
+        self.telefone = [telefone]
     
     def alterar_email(self, email):
         self.email = email
     
     def alterar_telefone(self, telefone):
-        self.telefone = telefone
+        if len(self.telefone) <3:
+            self.telefone.append(telefone)
+        else:
+            print('Memória cheia')
     
     def alterar_nome(self, nome):
         self.nome = nome
     
-    def imprimir(self):
-        print(self.nome)
-        print(self.telefone)
-        print(self.email)
-    
-    def str(self):
-    f'Esse é o nome: {self.nome.str}'
-    f'Esse é o telefone: {self.telefone.str}'
-    f'Esse é o email: {self.email.str}'
+    def __str__(self):
+        texto = 'Nome: {}\nEmail: {}\nTelefones:\n'
+        for item in self.telefone:
+            if item != None:
+                texto+='({0}) {1}-{2}'.format(item.DDD, item.numero, item.descricao)
+        return texto
 
 
 class Telefone:
@@ -47,6 +33,8 @@ class Telefone:
     def alterar_numero(self, numero):
         self.numero = numero
 
+    def __str__(self):
+        return '({0}) {1}-{2}'.format(self.DDD, self.numero, self.descricao)
 
 print('-' * 25 + '\n' + 'AGENDA'.center(25) + '\n' + '-' * 25)
 
@@ -55,7 +43,23 @@ dicio = {'1)': 'Inserir Contato', '2)': 'Pesquisar Contatos', '3)': 'Alterar Con
 for k, v in dicio.items():
     print(f'{(k)} {v:^5}')
 
-  
+class Agenda:
+    def __init__(self):
+        self.contatos = []
+
+    def pesquisar_nome(self, nome):
+        for contato in self.contatos:
+            if contato.nome == nome:
+                return contato
+        return None
+        
+    def alterar_contato(self, nome):
+        self.contatos = ''
+        
+    def add_contato(self, contato):
+        self.contatos.append(contato)
+    
+
 print ("""
     1.Inserir Contato
     2.Pesquisar Contato
