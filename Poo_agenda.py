@@ -38,10 +38,13 @@ class Agenda:
         self.contatos[] = Contato
 
     def pesquisar_nome(self, nome):
-        self.contato = Contato
-    def alterar_contato(self):
-    def add_contato(self):
-
+        self.contato = contato
+        
+    def alterar_contato(self, contato):
+        self.contato = contato
+        
+    def add_contato(self, contato):
+        self.contatos.append(contato)
 
 
 print('-' * 25 + '\n' + 'AGENDA'.center(25) + '\n' + '-' * 25)
