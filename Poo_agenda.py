@@ -40,8 +40,8 @@ class Agenda:
     def pesquisar_nome(self, nome):
         self.contato = contato
         
-    def alterar_contato(self, contato):
-        self.contato = contato
+    def alterar_contato(self, nome):
+        self.contato = ''
         
     def add_contato(self, contato):
         self.contatos.append(contato)
