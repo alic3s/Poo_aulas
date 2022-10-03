@@ -34,3 +34,12 @@ class Agenda:
 
     def pesquisar_nome(self, nome):
         self.contatos
+
+
+
+print('-' * 25 + '\n' + 'AGENDA'.center(25) + '\n' + '-' * 25)
+
+dicio = {'1)': 'Inserir Contato', '2)': 'Pesquisar Contatos', '3)': 'Alterar Contatos', '4)': 'Sair'}
+
+for k, v in dicio.items():
+    print(f'{(k)} {v:^5}')
