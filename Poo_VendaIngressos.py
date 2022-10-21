@@ -55,7 +55,20 @@ class Camarote(Ingresso):
 class Show:
     def __init__(self, artista, data, local) -> None:
         self.artista = artista
-        self.data = datetime.date()
+        self.data = datetime.date(data)
+        self.local = local
+        self.ipista = []
+        self.icamarote = []
+    
+    def __str__(self) -> str:
+        return f'O artista convidado é {self.artista}, no dia {self.data} no {self.local}'
+    
+    def gerarIngressos(self, quantidade, valor1, tipo):
+        if tipo == 1:
+            self.icamarote.append(quantidade)
+        elif tipo == " ":
+            self.ipista.append(quantidade)
+
 
 
 
