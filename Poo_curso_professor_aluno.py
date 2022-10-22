@@ -13,7 +13,7 @@ class Curso:
         self.docentes.append(professor)
 
     def __str__ (self):
-        return f"[O código do curso é: {self.codigo}, o nome é: {self.nome}, sua descrição: {self.descricao}, o coordenador: {self.coordenador} e os docentes: {self.docentes}]"
+        return f"[Código: {self.codigo}\nNome: {self.nome}\nDescrição: {self.descricao}\nCoordenador: {self.coordenador}\nDocentes: {self.docentes}]"
 
 class Professor:
     def __init__(self, matricula, nome_, cpf, admissao, email):
@@ -42,17 +42,5 @@ class Aluno:
         self.cursos.append(curso)
         print(f'Estes são os cursos no qual o aluno está matriculado: {self.cursos}')
     
-    def imprimir(self):
-        print(f'A matricula do aluno é: {self.matricula_a}')
-        print(f'O nome do aluno é: {self.nome_a}')
-        print(f'O cpf do aluno é: {self.cpf_a}')
-        print(f'O email do aluno: {self.email_a}')
-        print(f'Os cursos que o aluno faz são: {self.cursos}')
-
-biologia = Curso(123, 'Biologia', 'Dificil', 'Jorginho')
-carlos = Professor(123132, 'Carlos', 123123123, '123d1s2a3ds', '213123')
-pedro = Professor(12345, 'Pedro', 56576, '6yhg277', '65579')
-biologia.add_docente(carlos)
-biologia.add_docente(pedro)
-
-print(biologia)
+    def __str__(self) -> str:
+        return f'Matrí
