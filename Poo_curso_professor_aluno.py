@@ -43,4 +43,4 @@ class Aluno:
         print(f'Estes são os cursos no qual o aluno está matriculado: {self.cursos}')
     
     def __str__(self) -> str:
-        return f'Matrí
+        return f'Matrícula: {self.matricula_a}\nNome: {self.nome_a}\nCPF: {self.cpf_a}\nEmail: {self.email_a}\nCursos: {self.cursos}'
