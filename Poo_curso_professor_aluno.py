@@ -26,7 +26,7 @@ class Curso:
         self.docentes.append(professor)
 
     def __str__ (self):
-        texto = f'Código: {0}\nNome: {1}\nDescrição{3}'.format(self.codigo, self.nome, self.descricao)
+        texto = 'Código: {0}\nNome: {1}\nDescrição{3}'.format(self.codigo, self.nome, self.descricao)
         if self.coordenador is not None:
             texto += '\nCoordenador: {}\n'.format(self.coordenador.nome)
         textoDocentes = 'Docentes: \n'
@@ -35,12 +35,14 @@ class Curso:
                 textoDocentes = textoDocentes + '\n' + elemento.nome
         return texto + textoDocentes
 
+
+
 class Professor:
     def __init__(self, nome, cpf, dt_admissao, curso_lotacao, email = None):
         self.matricula = __class__.gerarMatricula()
         self.nome = nome
         self.cpf = cpf
-        self.admissao = dt_admissao
+        self.dt_admissao = dt_admissao
         self.email = email
         self._lotacao = curso_lotacao
 
@@ -52,20 +54,50 @@ class Professor:
     def lotacao(self, curso):
         self._lotacao = curso
         
-    def __str__ (self):
-        return f' [Matrícula: {self.matricula}, o nome: {self.nome_}, cpf: {self.cpf}, admissao: {self.admissao} email: {self.email}, lotação: {self.lotacao}]'
+    def __str__(self):
+        texto = 'Matrícula: {0}\nNome: {1}\nCPF: {2}\nData de Admissão: {3}\nEmail: {4}\
+            Lotação: {5}'.format(self.matricula, self.nome, self.cpf, self.dt_admissao,\
+                self.email, self._lotacao.nome)
+        return texto
+    
+    @staticmethod
+    def gerarMatricula():
+        ano = str(date.today().year)
+        mes = str(date.today().month)
+        registro = str(randint(1000,9999))
+        return ano + mes + registro
+
+
 
 class Aluno:
-    def __init__(self, matricula_a, nome_a, cpf_a, email_a = None):
-        self.matricula_a = matricula_a
-        self.nome_a = nome_a
-        self.cpf_a = cpf_a
-        self.email_a = email_a
-        self.cursos = []
+    def __init__(self, matricula, nome, cpf, email = None):
+        self.matricula = matricula
+        self.nome = nome
+        self.cpf = cpf
+        self.email = email
+        self._cursos = []
     
-    def matricular(self, curso):
-        self.cursos.append(curso)
-        print(f'Estes são os cursos no qual o aluno está matriculado: {self.cursos}')
+    @staticmethod
+    def gerarMatricula():
+        ano = str(date.today().year)
+        mes = str(date.today().month)
+        registro = str(randint(1000,9999))
+        return ano + mes + registro
     
-    def __str__(self) -> str:
-        return f'Matrícula: {self.matricula_a}\nNome: {self.nome_a}\nCPF: {self.cpf_a}\nEmail: {self.email_a}\nCursos: {self.cursos}'
+    @property
+    def cursos(self):
+        return self._cursos
+    
+    @cursos.setter
+    def cursos(self, cursos):
+        self.cursos.append(cursos)
+    
+    def __str__(self):
+        texto = 'Matrícula: {}\n'.format(self.matricula)+\
+            "Nome: {}\n".format(self.nome)+\
+                'CPF: {}\n'.format(self.cpf)+\
+                    'Email: {}\n'.format(self.email)
+        textoCursos = 'Os cursos que o aluno está matriculado são: '
+        for elemento in self.cursos:
+            textoCursos = textoCursos+', '+elemento.nome
+        return texto + textoCursos
