@@ -35,6 +35,56 @@ relatorioVendas(), neste método deverá ser apresentado a lista de todos os
 ingressos vendidos até o presente momento, apresentando as informações do ingresso,
 e apresentando ao final o total arrecadado com a venda dos ingressos(pista e
 camarote). No cabeçalho do relatório deve aparecer os dados do show.(1,0 ponto)'''
+#from date import datetime
+
+class Ingresso:
+    aux = 0
+    def __init__(self, valor):
+        self._cod =__class__.gerarCodigo()
+        self._valor = float(valor)
+        self.status = None
+    
+    @property
+    def cod(self):
+        return self._cod
+    
+    @property
+    def valor(self):
+        return self._valor
+    
+    @property
+    def status(self):
+        return self._status
+    
+    @status.setter
+    def status(self, status):
+        self._status = status
+    
+    def __str__(self):
+        return "Cod...."
+    
+    @staticmethod
+    def gerarCodigo():
+        ano = str(date.today())
+        Ingresso.aux = Ingresso.aux + 1
+        return ano + str(Ingresso.aux)
+
+class Camarote(Ingresso):
+    def __init__(self, valor, adicional):
+        Ingresso.__init__(self, valor):
+        self._adicional = float(adicional)
+    
+    @property
+    def adicional(self):
+        return self._adicional
+    
+    #@adicional.setter
+    #def adicional(self, adicional):
+        #self._adicional = adicional
+    
+    def __str__(self):
+        return 'Cod.: %s Status: %s Valor.: R$' #usar o property
+
 
 from random import randint, randrange
 
