@@ -1,60 +1,85 @@
-from ingresso import Ingresso, Camarote
-
 class Show:
     def __init__(self, artista, data, local) -> None:
-        aux = 0
-        aux2 = 0
-        self.artista = artista
-        self.data = data
-        self.local = local
-        self._pista = list()
-        self._camarote = list()
+        #aux = 0
+        #aux2 = 0
+        self._artista = artista
+        self._data = data
+        self._local = local
+        self._ingressos = []
+        self._camarote = []
+    
+    @property
+    def artista(self):
+        return self._artista
+    
+    @property
+    def data(self):
+        return self._data
+
+    @property
+    def local(self):
+        return self._local
     
     @property
     def pista(self):
         return self._pista
-    
-    @pista.setter
-    def pista(self, valor):
-        self.pista.append(valor)
+    @ingressos.setter
+    def ingressos(self, ingresso):
+        self._ingressos.append(ingresso)
     
     @property
     def camarote(self):
         return self._camarote
-    
     @camarote.setter
-    def camarote(self, valor2):
-        self.camarote.append(valor2)
+    def camarote(self, camarote):
+        self.camarote.append(camarote)
 
     def __str__(self) -> str:
-        return f'###### Informações do Show ######\nArtista convidado: {self.artista}\nData: {self.data}\nLocal: {self.local}'
+        return f'###### Informações do Show ######\nArtista convidado: {self._artista}\nData: {self._data}\nLocal: {self._local}'
 
     def gerarIngressos(self, quantidade, valor, tipo = None):
-        if tipo == None:
+        if (tipo == None):
             for i in range(quantidade):
-                novo_ingresso = Ingresso(valor)
-                self.pista(quantidade, novo_ingresso)
-        elif tipo == 1:
+                ingresso = Ingresso(valor)
+                self.ingressos = ingresso
+
+        elif (tipo == 1):
             adicional = float(input('Valor adicional: '))
-            valor2 = valor + adicional
             for i in range(quantidade):
-                novo_ingresso = Camarote(valor2)
-                self.camarote(quantidade, novo_ingresso)
+                ingresso = Camarote(valor, adicional)
+                self.camarote = ingresso
+        
+        else:
+            print('Tipo inválido')
 
     def venderIngresso(self, quantidade, tipo = None):
-        if tipo == None:
-            for i in range(quantidade):
-                self.ingresso[Show.aux].vender()
-                Show.aux += 1
-        else:
-            for i in range(quantidade):
-                self.camarote[Show.aux2].vender()
-                Show.aux2 += 1
+        total = 0
+        cont = 0
+        if (tipo == None):
+            for elemento in self.ingressos:
+                if (elemento.status == None) and (cont != quantidade):
+                    elemento.status = 'Vendido'
+                    total += elemento.valor
+                    cont += 1
+
+        elif(tipo == 1):
+            for elemento in self.camarote:
+                if (elemento.status == None) and (cont != quantidade):
+                    elemento.status = 'Vendido'
+                    total += (elemento.valor + elemento.adicional)
+                    cont += 1
+        return total
 
     def relatorioPista(self):
-        for i in range(len(self.ingresso)):
-            print(self.ingresso[i])
-    
-    def relatorioCamarote(self):
-        for i in range(len(self.camarote[i])):
-            print(self.camarote[i])
+        print(self)
+        total = 0
+        for elemento in self.ingressos:
+            if elemento in self.ingressos:
+                if elemento.status == 'Vendido':
+                    print(elemento)
+                    total += elemento.valor
+
+            for elemento in self.camarote:
+                if elemento.status == 'Vendido':
+                    print(elemento)
+                    total += elemento.valor + elemento.adicional
