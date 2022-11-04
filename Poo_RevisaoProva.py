@@ -16,11 +16,28 @@ Mostrar os dados da conta de um cliente.'''
 
 from datetime import date
 
+#essa classe tá lindona
 class Conta:
     def __init__(self, nm_cliente, n_conta, saldo):
-        self.nm_cliente = nm_cliente
-        self.n_conta = n_conta
-        self.saldo = float(saldo)
+        self._nm_cliente = nm_cliente
+        self._n_conta = n_conta
+        self._saldo = float(saldo)
+
+    @property
+    def nm_cliente(self):
+        return self._nm_cliente
+    
+    @property
+    def n_conta(self):
+        return self._n_conta
+    
+    @property
+    def saldo(self):
+        return self._saldo
+    
+    @saldo.setter
+    def saldo(self, saldo):
+        self._saldo = saldo
     
     def sacar(self):
         valor = float(input('Quanto quer sacar? '))
@@ -28,17 +45,19 @@ class Conta:
             print('Saldo insuficiente')
         else:
             self.saldo = self.saldo - valor
-            print(f'\nAo sacar esse valor o saldo passa a ser R${self.saldo}')
+            print(f'\nAo sacar esse valor o saldo passa a ser R${self.saldo:.2f}'.format(self.saldo))
     
     def depositar(self):
         deposito = float(input('Quanto quer depositar? '))
         self.saldo = self.saldo + deposito
-        print(f'\nO saldo na conta atualizado com o depósito é R${self.saldo}\n')
+        print(f'\nO saldo na conta atualizado com o depósito é R${self.saldo:.2f}\n'.format(self.saldo))
     
     def imprimir(self):
         print(f'\nTitular da Conta --> {self.nm_cliente}')
         print(f'\nNúmero da Conta --> {self.n_conta}')
-        print(f'\nSaldo na Conta --> {self.saldo}')
+        print(f'\nSaldo na Conta --> R${self.saldo:.2f}'.format(self.saldo))
+
+
 
 class ContaPoupanca(Conta):
     def __init__(self, nm_cliente, n_conta, saldo, dt_rendimento):
@@ -64,6 +83,8 @@ class ContaPoupanca(Conta):
         print(f'Data do rendimento da Conta --> {self.dt_rendimento}')
         return super().imprimir()
 
+
+#essa é a problemática
 class ContaEspecial(Conta):
     def __init__(self, nm_cliente, n_conta, saldo, limite):
         super().__init__(nm_cliente, n_conta, saldo)
@@ -77,31 +98,31 @@ class ContaEspecial(Conta):
             if self.limite > negativo:
                 self.limite = self.limite - negativo
                 self.saldo = self.saldo - saque
-                print(f'Seu saldo atual é {self.saldo}, e seu limite {self.limite}')
+                print(f'Seu saldo atual é R${self.saldo:.2f}, e seu limite {self.limite}'.format(self.saldo))
         else:
-            self.saldo = self.saldo - saque
-            print(f'\nAo sacar esse valor o saldo passa a ser R${self.saldo}')
+            self.saldo = self.saldo + saque
+            print(f'\nAo sacar esse valor o saldo passa a ser R${self.saldo:.2f}'.format(self.saldo))
     
     def depositar(self):
         deposito = float(input('\nQuanto quer depositar? '))
         self.saldo = self.saldo + deposito
         self.limite = self.limite
-        print(f'\nO saldo na conta atualizado com o depósito é R${self.saldo}\n')
+        print(f'\nO saldo na conta atualizado com o depósito é R${self.saldo:.2f}\n'.format(self.saldo))
     
     def imprimir(self):
         print(f'Limite da Conta --> {self.limite2}')
         return super().imprimir()
 
 
-c = Conta('Alice', 209, 100.00)
+'''c = Conta('Alice', 209, 100.00)
 c.depositar()
 c.sacar()
-c.imprimir()
+c.imprimir()'''
 
-cp = ContaPoupanca('Rui', 708, 55.40, 3)
+'''cp = ContaPoupanca('Rui', 708, 55.40, 7)
 cp.calcularNovoSaldo()
 cp.depositar()
-cp.imprimir()
+cp.imprimir()'''
 
 ce = ContaEspecial('Maria', 465, 25.89, 60)
 ce.sacar()
