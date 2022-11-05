@@ -39,8 +39,8 @@ class Conta:
     def saldo(self, saldo):
         self._saldo = saldo
     
-    def sacar(self):
-        valor = float(input('Quanto quer sacar? '))
+    def sacar(self, valor):
+        #valor = float(input('Quanto quer sacar? '))
         if valor > self.saldo:
             print('Saldo insuficiente')
         else:
@@ -89,28 +89,35 @@ class ContaEspecial(Conta):
     def __init__(self, nm_cliente, n_conta, saldo, limite):
         super().__init__(nm_cliente, n_conta, saldo)
         self.limite = float(limite)
-        self.limite2 = self.limite
     
-    def sacar(self):
-        saque = float(input('Quanto quer sacar? '))
-        if saque > self.saldo:
-            negativo = saque - self.saldo
-            if self.limite > negativo:
-                self.limite = self.limite - negativo
-                self.saldo = self.saldo - saque
-                print(f'Seu saldo atual é R${self.saldo:.2f}, e seu limite {self.limite}'.format(self.saldo))
+    def sacarEspecial(self, valor):
+        #valor = float(input('\nQuanto quer sacar? '))
+        if self.saldo >= 0:
+            if valor <= self.saldo + self.limite:
+                if self.saldo >= valor:
+                    self.sacar(valor)
+                else:
+                    self.saldo = self.saldo - valor
+                    self.limite = self.limite - valor
+                    #print(f'Seu saldo atual é R${self.saldo:.2f}, e seu limite {self.limite}'.format(self.saldo))
+            else:
+                print('Limite insuficiente')
         else:
-            self.saldo = self.saldo + saque
-            print(f'\nAo sacar esse valor o saldo passa a ser R${self.saldo:.2f}'.format(self.saldo))
+            if self.limite - valor < 0:
+                print('Limite insuficiente')
+            else:
+                self.saldo = self.saldo - valor
+                self.limite = self.limite - valor
+                #print(f'\nAo sacar esse valor o saldo passa a ser R${self.saldo:.2f}'.format(self.saldo))
     
     def depositar(self):
         deposito = float(input('\nQuanto quer depositar? '))
         self.saldo = self.saldo + deposito
-        self.limite = self.limite
+        #self.limite = self.limite
         print(f'\nO saldo na conta atualizado com o depósito é R${self.saldo:.2f}\n'.format(self.saldo))
     
     def imprimir(self):
-        print(f'Limite da Conta --> {self.limite2}')
+        print(f'Limite da Conta --> {self.limite}')
         return super().imprimir()
 
 
@@ -124,7 +131,6 @@ cp.calcularNovoSaldo()
 cp.depositar()
 cp.imprimir()'''
 
-ce = ContaEspecial('Maria', 465, 25.89, 60)
-ce.sacar()
-ce.depositar()
+ce = ContaEspecial('Maria', 465, 30, 60)
+ce.sacarEspecial(40)
 ce.imprimir()
