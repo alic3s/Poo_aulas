@@ -84,7 +84,7 @@ class ContaPoupanca(Conta):
         return super().imprimir()
 
 
-#essa é a problemática
+#essa é a problemática e eu ainda não entendo ela
 class ContaEspecial(Conta):
     def __init__(self, nm_cliente, n_conta, saldo, limite):
         super().__init__(nm_cliente, n_conta, saldo)
@@ -131,6 +131,6 @@ cp.calcularNovoSaldo()
 cp.depositar()
 cp.imprimir()'''
 
-ce = ContaEspecial('Maria', 465, 30, 60)
-ce.sacarEspecial(40)
+ce = ContaEspecial('Maria', 465, 100, 400)
+ce.sacarEspecial(500)
 ce.imprimir()
