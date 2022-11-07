@@ -1,7 +1,7 @@
+from ingresso import Ingresso, Camarote
+
 class Show:
     def __init__(self, artista, data, local) -> None:
-        #aux = 0
-        #aux2 = 0
         self._artista = artista
         self._data = data
         self._local = local
@@ -21,8 +21,8 @@ class Show:
         return self._local
     
     @property
-    def pista(self):
-        return self._pista
+    def ingressos(self):
+        return self._ingressos
     @ingressos.setter
     def ingressos(self, ingresso):
         self._ingressos.append(ingresso)
@@ -35,7 +35,7 @@ class Show:
         self.camarote.append(camarote)
 
     def __str__(self) -> str:
-        return f'###### Informações do Show ######\nArtista convidado: {self._artista}\nData: {self._data}\nLocal: {self._local}'
+        return f'\n###### Informações do Show ######\nArtista convidado: {self._artista}\nData: {self._data}\nLocal: {self._local}'
 
     def gerarIngressos(self, quantidade, valor, tipo = None):
         if (tipo == None):
@@ -44,8 +44,8 @@ class Show:
                 self.ingressos = ingresso
 
         elif (tipo == 1):
-            adicional = float(input('Valor adicional: '))
             for i in range(quantidade):
+                adicional = float(input('\nValor adicional do ingresso VIP: '))
                 ingresso = Camarote(valor, adicional)
                 self.camarote = ingresso
         
@@ -70,16 +70,43 @@ class Show:
                     cont += 1
         return total
 
-    def relatorioPista(self):
+
+    def relatorioVendas(self):
         print(self)
         total = 0
-        for elemento in self.ingressos:
-            if elemento in self.ingressos:
-                if elemento.status == 'Vendido':
-                    print(elemento)
-                    total += elemento.valor
+        
+        print('\n' + '=' * 10 + 'Pista' + '=' * 10 + '\n')
 
-            for elemento in self.camarote:
-                if elemento.status == 'Vendido':
-                    print(elemento)
-                    total += elemento.valor + elemento.adicional
+        for i in self.ingressos:
+            if i.status == 'Vendido':
+                print(i, '\n')
+                total += i.valor
+
+        print('=' * 10 + 'Camarote' + '=' * 10 + '\n')
+
+        for i in self.camarote:
+            if i.status == 'Vendido':
+                print(i, '\n')
+                total += i.valor + i.adicional
+
+        print(f'TOTAL = R${total:.2f}\n')
+    
+    def __str__(self) -> str:
+        return f'\n###### Informações do Show ######\nArtista convidado: {self._artista}\nData: {self._data}\nLocal: {self._local}'
+
+
+
+
+
+show1=Show('Lorde', '06/11/2022','Primavera Sound - SP')
+print(show1)
+
+show1.gerarIngressos(1,100) #ingresso pista
+show1.gerarIngressos(1,200,1) #ingresso camarote/VIP
+
+
+print(f'\nValor a pagar por 1 ingresso de pista: R${show1.venderIngresso(1)}') #um ingresso pista
+
+print(f'Valor a pagar por 1 ingresso VIP: R${show1.venderIngresso(1,1)}\n') #um ingresso VIP
+
+show1.relatorioVendas()
