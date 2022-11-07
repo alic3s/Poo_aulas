@@ -16,6 +16,8 @@ Mostrar os dados da conta de um cliente.'''
 
 from datetime import date
 
+print('#' * 25 + 'CONTA BANCÁRIA'.center(20) + '#' * 25)
+
 #essa classe tá lindona
 class Conta:
     def __init__(self, nm_cliente, n_conta, saldo):
@@ -23,6 +25,7 @@ class Conta:
         self._n_conta = n_conta
         self._saldo = float(saldo)
 
+    #nao faz alteração nesses atributos
     @property
     def nm_cliente(self):
         return self._nm_cliente
@@ -35,52 +38,61 @@ class Conta:
     def saldo(self):
         return self._saldo
     
-    @saldo.setter
-    def saldo(self, saldo):
-        self._saldo = saldo
+    #o método sacar faz a alteração no saldo, ou seja, não precisa do setter
+    #@saldo.setter
+    #def saldo(self, saldo):
+    #    self._saldo = saldo
     
-    def sacar(self, valor):
-        #valor = float(input('Quanto quer sacar? '))
+    def sacar(self):
+        valor = float(input('\nQuanto quer sacar? '))
         if valor > self.saldo:
-            print('Saldo insuficiente')
+            print(f'\nSaldo insuficiente. Saldo R${self.saldo:.2f}'.format(self.saldo))
         else:
-            self.saldo = self.saldo - valor
+            self._saldo -= valor
             print(f'\nAo sacar esse valor o saldo passa a ser R${self.saldo:.2f}'.format(self.saldo))
     
     def depositar(self):
-        deposito = float(input('Quanto quer depositar? '))
-        self.saldo = self.saldo + deposito
-        print(f'\nO saldo na conta atualizado com o depósito é R${self.saldo:.2f}\n'.format(self.saldo))
+        valor = float(input('\nQuanto quer depositar? '))
+        self._saldo += valor
+        print(f'O saldo na conta atualizado com o depósito é R${self.saldo:.2f}\n'.format(self.saldo))
     
     def imprimir(self):
-        print(f'\nTitular da Conta --> {self.nm_cliente}')
-        print(f'\nNúmero da Conta --> {self.n_conta}')
-        print(f'\nSaldo na Conta --> R${self.saldo:.2f}'.format(self.saldo))
+        #podia ser --> def __str__(self):
+        #               return f'Titular: {self._nm_cliente}\n Conta....
+        print(f'\nTitular da Conta --> {self._nm_cliente}')
+        print(f'\nNúmero da Conta --> {self._n_conta}')
+        print(f'\nSaldo na Conta --> R${self._saldo:.2f}'.format(self._saldo))
 
 
 
 class ContaPoupanca(Conta):
     def __init__(self, nm_cliente, n_conta, saldo, dt_rendimento):
         super().__init__(nm_cliente, n_conta, saldo)
-        self.dt_rendimento = int(dt_rendimento)
+        self._dt_rendimento = int(dt_rendimento)
         self.dt_hj = date.today().day
     
+    @property
+    def dt_rendimento(self):
+        return self._dt_rendimento
+
     def calcularNovoSaldo(self):
         if self.dt_hj == self.dt_rendimento:
-            taxa = float(input('Valor da sua taxa de rendimento: '))
+            taxa = float(input('\nValor da sua taxa de rendimento: '))
             rendimento = self.saldo * (taxa / 100)
-            self.saldo = self.saldo + rendimento
-            print(f'\nAtualizamos sua conta com sua taxa de rendimento e seu saldo passou a ser R${self.saldo:.2f}'.format(self.saldo))
+            self._saldo += rendimento
+            print(f'Rendimento R${rendimento:.2f}'.format(rendimento))
+            print(f'Saldo atual R${self.saldo:.2f}'.format(self.saldo))
         else:
             print(f'\nO dia do seu rendimento é {self.dt_rendimento}, tente novamente em {self.dt_rendimento - self.dt_hj} dias')
     
-    def depositar(self):
-        deposito = float(input('\nQuanto quer depositar? \n'))
-        self.saldo = self.saldo + deposito
-        print(f'\nO saldo na conta atualizado com o depósito é R${self.saldo:.2f}'.format(self.saldo))
+    #esse método é igual o da classe pai, ou seja, não precisa fazer de novo
+    #def depositar(self):
+        #deposito = float(input('\nQuanto quer depositar? \n'))
+        #self.saldo = self.saldo + deposito
+        #print(f'\nO saldo na conta atualizado com o depósito é R${self.saldo:.2f}'.format(self.saldo))
     
     def imprimir(self):
-        print(f'Data do rendimento da Conta --> {self.dt_rendimento}')
+        print(f'\nData do rendimento da Conta --> {self.dt_rendimento}')
         return super().imprimir()
 
 
@@ -88,36 +100,48 @@ class ContaPoupanca(Conta):
 class ContaEspecial(Conta):
     def __init__(self, nm_cliente, n_conta, saldo, limite):
         super().__init__(nm_cliente, n_conta, saldo)
-        self.limite = float(limite)
+        self._limite = float(limite)
+        self._limite1 = self._limite
     
-    def sacarEspecial(self, valor):
-        #valor = float(input('\nQuanto quer sacar? '))
-        if self.saldo >= 0:
-            if valor <= self.saldo + self.limite:
-                if self.saldo >= valor:
-                    self.sacar(valor)
-                else:
-                    self.saldo = self.saldo - valor
-                    self.limite = self.limite - valor
-                    #print(f'Seu saldo atual é R${self.saldo:.2f}, e seu limite {self.limite}'.format(self.saldo))
-            else:
-                print('Limite insuficiente')
+    @property
+    def limite(self):
+        return self._limite
+    
+    @property
+    def limite1(self):
+        return self._limite1
+    
+    #podia ter um setter, mas não que fosse necessário
+    
+    def sacar(self):
+        valor = float(input('\nQuanto quer sacar? '))
+        if valor > self.saldo + self.limite:
+            print(f'Saldo insuficiente. \nSaldo R${self.saldo:.2f}'.format(self.saldo))
         else:
-            if self.limite - valor < 0:
-                print('Limite insuficiente')
+            if valor < self.saldo:
+                self._saldo -= valor
+                print(f'Saldo atual R${self.saldo:.2f}\nLimite atual R${self.limite:.2f}'.format(self.saldo, self.limite))
+                print(f'Saldo disponível com limite R$ {self.saldo + self.limite}')
             else:
-                self.saldo = self.saldo - valor
-                self.limite = self.limite - valor
-                #print(f'\nAo sacar esse valor o saldo passa a ser R${self.saldo:.2f}'.format(self.saldo))
+                self._saldo -= valor
+                self._limite += self.saldo
+                print(f'Saldo atual R${self.saldo:.2f}\nLimite atual R${self.limite:.2f}'.format(self.saldo, self.limite))
+                
+                if self.saldo > self.limite:
+                    print(f'Saldo real R${self.saldo}')
+                else:
+                    print('Saldo real R$%.2f'%(self.saldo))
+                    print(f'Saldo disponível com limite R$ {self.saldo + self.limite}')
     
-    def depositar(self):
-        deposito = float(input('\nQuanto quer depositar? '))
-        self.saldo = self.saldo + deposito
+    #esse método também é igual ao da conta pai, não precisava repetir
+    #def depositar(self):
+        #deposito = float(input('\nQuanto quer depositar? '))
+        #self.saldo = self.saldo + deposito
         #self.limite = self.limite
-        print(f'\nO saldo na conta atualizado com o depósito é R${self.saldo:.2f}\n'.format(self.saldo))
+        #print(f'\nO saldo na conta atualizado com o depósito é R${self.saldo:.2f}\n'.format(self.saldo))
     
     def imprimir(self):
-        print(f'Limite da Conta --> {self.limite}')
+        print(f'\nLimite da Conta --> {self.limite1}')
         return super().imprimir()
 
 
@@ -131,6 +155,7 @@ cp.calcularNovoSaldo()
 cp.depositar()
 cp.imprimir()'''
 
-ce = ContaEspecial('Maria', 465, 100, 400)
-ce.sacarEspecial(500)
+ce = ContaEspecial('Maria', 465, 1000, 1000)
+ce.depositar()
+ce.sacar()
 ce.imprimir()
