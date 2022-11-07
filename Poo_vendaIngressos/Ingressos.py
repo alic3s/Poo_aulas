@@ -35,7 +35,8 @@ relatorioVendas(), neste método deverá ser apresentado a lista de todos os
 ingressos vendidos até o presente momento, apresentando as informações do ingresso,
 e apresentando ao final o total arrecadado com a venda dos ingressos(pista e
 camarote). No cabeçalho do relatório deve aparecer os dados do show.(1,0 ponto)'''
-#from date import datetime
+
+from datetime import date
 
 class Ingresso:
     aux = 0
@@ -61,7 +62,7 @@ class Ingresso:
         self._status = status
     
     def __str__(self):
-        return "Cod...."
+        return f"Código: {self.cod}\nValor: {self.valor}\nStatus: {self.status}"
     
     @staticmethod
     def gerarCodigo():
@@ -69,9 +70,11 @@ class Ingresso:
         Ingresso.aux = Ingresso.aux + 1
         return ano + str(Ingresso.aux)
 
+
+
 class Camarote(Ingresso):
     def __init__(self, valor, adicional):
-        Ingresso.__init__(self, valor):
+        Ingresso.__init__(self, valor)
         self._adicional = float(adicional)
     
     @property
@@ -83,52 +86,4 @@ class Camarote(Ingresso):
         #self._adicional = adicional
     
     def __str__(self):
-        return 'Cod.: %s Status: %s Valor.: R$' #usar o property
-
-
-from random import randint, randrange
-
-'''class Ingresso:
-    def __init__(self, valor) -> None:
-        self.valor = valor
-        self.status = ''
-    
-    @staticmethod
-    def codigo():
-        cod = randint(100, 1000)
-        return cod
-    
-    def __str__(self) -> str:
-        return f'Valor: {self.valor}\nStatus: {self.status}\nCódigo: {self.codigo()}'
-        '''
-
-class Ingresso:
-    codigo = 0
-    def __init__(self, valor):
-        self.cod = __class__.codigo + 1
-        __class__.codigo += 1
-        self.valor = valor
-        self.status = None
-    
-    def vender(self):
-        self.status = "Vendido"
-    
-    def __str__(self) -> str:
-        return f'Valor: {self.valor}\nStatus: {self.status}\nCódigo: {self.cod}'
-
-'''class Camarote(Ingresso):
-    def __init__(self, valor, adicional = 10.00):
-        super().__init__(valor)
-        self.valor2 = valor + adicional
-    
-    def __str__(self) -> str:
-        return f'Valor: {self.valor2}\nStatus: {self.status}\nCódigo: {self.codigo}'
-'''
-
-class Camarote(Ingresso):
-    def __init__(self, valor, adicional):
-        super().__init__(valor)
-        self.valor2 = valor + adicional
-    
-    def __str__(self) -> str:
-        return f'Valor: {self.valor2}\nStatus: {self.status}\nCódigo: {self.codigo}'
+        return f"Código: {self.cod}\nValor: {self.valor + self.adicional}\nStatus: {self.status}"
