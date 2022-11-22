@@ -20,29 +20,27 @@ class Pessoa:
 
 
 class Remetente(Pessoa):
-    def __init__(self, nome, sobrenome, email, cartoes) -> str:
+    def __init__(self, nome, sobrenome, email) -> str:
         super().__init__(nome, sobrenome, email)
         self._lista = []
-        for c in cartoes:
-            self._lista.append(c)
     
     @property
     def lista(self):
         return self._lista
         
     
-    def addCartao(self, cartoes):
-        self._lista.append(cartoes)
+    def addCartao(self, cartao):
+        self._lista.append(cartao)
     
-    def showCartao(self, cartoes):
-        if cartoes == 1:
-            f'Nome do destinatário: {self.destinatario.nome}, {self.destinatario.sobrenome}\nMensagem do cartão: \nMensagem particular: \nAss: '
+    def showCartao(self, cartao):
+        if cartao == Diadosnamorados:
+            return f'Nome do destinatário: {cartao.destinatario.nome} {cartao.destinatario.sobrenome}\nMensagem do cartão: {Diadosnamorados.showMessage}\nMensagem particular: {cartao.messagePlus}\nAss: {self.nome} {self.sobrenome}'
     
 
 class Cartao(ABC):
-    def __init__(self, destinatario: Pessoa, messagePlus = None):
+    def __init__(self, destinatario: Pessoa, messagePlus = input('Mensagem particular: ')):
         self.destinatario = destinatario
-        self.messagePlus = messagePlus((input('Informe a mensagem que deseja enviar --> ')))
+        self.messagePlus = messagePlus
 
     @abstractmethod
     def showMessage(self):
