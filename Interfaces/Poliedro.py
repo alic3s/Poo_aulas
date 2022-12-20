@@ -15,7 +15,7 @@ class Poliedro:
 
     def __str__(self):
         if self.ehconvexo():
-            poliedro é convexo
+            print('Poliedro convexo')
         else:
-            nao é convexo
+            print('Poliedro não convexo')
         return f'Area: {self.calculaArea}\nVolume: {self.calculaVolume}'
