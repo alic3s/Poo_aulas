@@ -6,12 +6,12 @@ class Cilindro:
         self.altura = altura
     
     def calculaArea(self):
-        return {2 * 3,14 * self.raio(self.altura + self.raio)}
-        2 * math * ....
+        area = 2 * math.pi * self.raio(self.altura + self.raio)
+        return area
+        
         
     def calculaVolume(self): 
-        return {3,14 * self.raio * self.raio * self.altura}
-        math.pi.pow...
-    
+        return math.pi * math.pow(self.raio, 2) * self.altura
+        
     def __str__(self):
         return f'Area: {self.calculaArea}\nVolume: {self.calculaVolume}'
