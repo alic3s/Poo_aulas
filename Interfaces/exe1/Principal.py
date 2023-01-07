@@ -6,5 +6,8 @@ from Poliedro import Poliedro
 iFormaGeometrica.register(Poliedro)
 iFormaGeometrica.register(Cilindro)
 
-cilindro = Cilindro(2, 5)
-print(cilindro)
+cili = Cilindro(2, 5)
+print(cili)
+
+poliedro = Poliedro(4,8,8,10,12,9)
+print(poliedro)
