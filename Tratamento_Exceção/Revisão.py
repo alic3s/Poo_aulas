@@ -9,7 +9,7 @@ class SaldoExcecaoError(Exception):
 
 def validarSaque(self, saque):
     if saque > self.saldo:
-        raise 
+        raise SaldoExcecaoError('Saque maior que o saldo.')
 
 class Conta:
     def __init__(self, agencia=str, numConta=int, saldo=float, senha=str):
@@ -29,4 +29,5 @@ class Conta:
         try:
             s = input(float('Valor a ser sacado: '))
             validarSaque(s)
-        except SaldoExcecaoError():
+        except SaldoExcecaoError as e:
+            print(f'ERRO {e}')
