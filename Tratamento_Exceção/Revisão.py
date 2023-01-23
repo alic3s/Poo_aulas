@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from datetime import datetime, date
+
 class iAutenticavel(ABC):
     @abstractmethod
     def autenticar(self):
@@ -18,6 +20,12 @@ class Conta:
         self.saldo = saldo
         self.senha = senha
     
+    def autenticar(self, senha1) -> bool:
+        if senha1 == self.senha:
+            return True
+        else:
+            return False
+    
     def depositar(self, valor) -> float:
         try:
             self.saldo += valor
@@ -31,3 +39,48 @@ class Conta:
             validarSaque(s)
         except SaldoExcecaoError as e:
             print(f'ERRO {e}')
+    
+    def __str__(self) -> str:
+        return 'Agencia: {0} Conta; {1} Saldo atual: {2}'.format(self.agencia, self.numConta, self.saldo)
+    
+
+
+class ContaPoupanca(Conta):
+    def __init__(self, agencia=str, numConta=int, saldo=float, senha=str, percRendimento=float):
+        super().__init__(agencia, numConta, saldo, senha)
+        self.percRendimento = percRendimento
+    
+    def autenticar(self, senha) -> bool:
+        if senha == self.senha:
+            return True
+        else:
+            return False
+
+    def calcularRendimento(self):
+        s = (self.saldo + self.percRendimento/100)
+        self.saldo = s
+
+
+class ContaEspecial(Conta):
+    def __init__(self, agencia=str, numConta=int, saldo=float, senha=str, limite=float, juros=float):
+        super().__init__(agencia, numConta, saldo, senha)
+        self.limite = limite
+        self.juros = juros
+    
+    def autenticar(self, senha) -> bool:
+        if senha == self.senha:
+            return True
+        else:
+            return False
+
+    def debitarJuros(self, data):
+        self.data = datetime.strptime(data, '%d/%m/%y').date()
+
+        #hoje = date.today()
+        if self.data == ('01/%m/%y'):
+           self.saldo = self.saldo - self.juros
+
+
+a = Conta('uai', 12, 33.10, 'help')
+a.autenticar('senha')
+print()
