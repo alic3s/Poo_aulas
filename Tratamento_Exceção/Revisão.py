@@ -14,10 +14,10 @@ def validarSaque(self, saque):
         raise SaldoExcecaoError('Saque maior que o saldo.')
 
 class Conta:
-    def __init__(self, agencia=str, numConta=int, saldo=float, senha=str):
+    def __init__(self, agencia=str, numConta=int, saldo=0, senha=str):
         self.agencia = agencia
         self.numConta = numConta
-        self.saldo = saldo
+        self.saldo = 0
         self.senha = senha
     
     def autenticar(self, senha1) -> bool:
@@ -41,14 +41,15 @@ class Conta:
             print(f'ERRO {e}')
     
     def __str__(self) -> str:
-        return 'Agencia: {0} Conta; {1} Saldo atual: {2}'.format(self.agencia, self.numConta, self.saldo)
+        return 'Agencia: {0} Conta; {1} Saldo atual: {2} Senha: {3}'.format(self.agencia, self.numConta, self.saldo, self.senha)
     
 
 
 class ContaPoupanca(Conta):
-    def __init__(self, agencia=str, numConta=int, saldo=float, senha=str, percRendimento=float):
+    def __init__(self, agencia=str, numConta=int, saldo=0, senha=str, percRendimento=float, diaRendimento=date):
         super().__init__(agencia, numConta, saldo, senha)
         self.percRendimento = percRendimento
+        self.diaRendimento = diaRendimento
     
     def autenticar(self, senha) -> bool:
         if senha == self.senha:
@@ -57,12 +58,13 @@ class ContaPoupanca(Conta):
             return False
 
     def calcularRendimento(self):
-        s = (self.saldo + self.percRendimento/100)
-        self.saldo = s
+        if date.today() == self.diaRendimento:
+            s = (self.saldo + self.percRendimento/100)
+            self.saldo = s
 
 
 class ContaEspecial(Conta):
-    def __init__(self, agencia=str, numConta=int, saldo=float, senha=str, limite=float, juros=float):
+    def __init__(self, agencia=str, numConta=int, saldo=0, senha=str, limite=float, juros=float):
         super().__init__(agencia, numConta, saldo, senha)
         self.limite = limite
         self.juros = juros
@@ -81,6 +83,7 @@ class ContaEspecial(Conta):
            self.saldo = self.saldo - self.juros
 
 
-a = Conta('uai', 12, 33.10, 'help')
-a.autenticar('senha')
-print()
+a = Conta('uai', 12, 'help')
+print(a)
+a.depositar(10)
+print(a)
